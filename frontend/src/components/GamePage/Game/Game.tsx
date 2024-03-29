@@ -49,7 +49,6 @@ export default function Game(): JSX.Element {
 	useEffect(() => {
 		if (!gameContainerRef.current) return
 
-
 		class GameData extends Phaser.Scene {
 			nave: Phaser.Physics.Arcade.Sprite
 			pntAnel: Phaser.Physics.Arcade.Sprite
@@ -110,8 +109,8 @@ export default function Game(): JSX.Element {
 				this.load.image('naveLateral', naveLateral);
 			}
 
-			resize() {
-				const containerWidth = window.innerWidth;
+			resizee() {
+					const containerWidth = window.innerWidth;
 					const containerHeight = window.innerHeight;
 
 					// Redimensionar o plano de fundo
@@ -137,12 +136,15 @@ export default function Game(): JSX.Element {
 					// Reposicionar a nave no centro da tela
 					this.nave.x = containerWidth / 2;
 					this.nave.y = containerHeight / 2;
-			}
+
+					//redimecionar a nave
+					this.physics.world.setBounds(0, 0, containerWidth, containerHeight);
+				}
 
 			checkResize() {
 				// Adiciona um ouvinte de evento para o redimensionamento da janela
 				window.addEventListener('resize', () => {
-					this.resize();
+					this.resizee();
 				});
 
 			}

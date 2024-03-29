@@ -54,6 +54,7 @@ export default function GameWW(): JSX.Element {
 		left: '50%',
 	}
 
+
 	useEffect(() => {
 		userData.socket?.on('updateGame', (data: GamePongProps) => {
 			setFakeGame(data)
@@ -72,6 +73,7 @@ export default function GameWW(): JSX.Element {
 		}
 	}, [room])
 
+
 	const paddleLeft: React.CSSProperties = {
 		height: `${fakeGame.paddleLeft.height}%`,
 		width: `${fakeGame.paddleLeft.width}%`,
@@ -81,6 +83,7 @@ export default function GameWW(): JSX.Element {
 		left: `${fakeGame.paddleLeft.positionX}%`,
 	}
 
+
 	const paddleRight: React.CSSProperties = {
 		height: `${fakeGame.paddleRight.height}%`,
 		width: `${fakeGame.paddleRight.width}%`,
@@ -89,6 +92,7 @@ export default function GameWW(): JSX.Element {
 		top: `${fakeGame.paddleRight.position_front}%`,
 		left: `${fakeGame.paddleRight.positionX}%`,
 	}
+
 
 	const ball: React.CSSProperties = {
 		height: `${window.innerHeight * 0.03}px`,
@@ -100,6 +104,7 @@ export default function GameWW(): JSX.Element {
 		borderRadius: '50%',
 	}
 
+
 	function hadleMovie(key: string) {
 		if (key !== 'w' && key !== 's') return
 
@@ -107,6 +112,7 @@ export default function GameWW(): JSX.Element {
 		let isUp = key === 'w' ? true : false
 		userData.socket?.emit('updatePaddle', { roomID: room, isLeft: isLeft, isUp: isUp, pause: false })
 	}
+
 
 	const movePaddleLeft = (e: React.KeyboardEvent<HTMLDivElement>) => {
 		if (fakeGame.winner !== "") return null
@@ -123,6 +129,7 @@ export default function GameWW(): JSX.Element {
 		}
 	}
 
+
 	const cssPage: React.CSSProperties = {
 		height: '100vh',
 		width: '100vw',
@@ -130,7 +137,6 @@ export default function GameWW(): JSX.Element {
 		backgroundImage: `url(https://wallpaperaccess.com/full/2513478.jpg)`,
 		backgroundSize: 'cover',
 	}
-
 
 
 	let power: React.CSSProperties = {}
@@ -146,17 +152,20 @@ export default function GameWW(): JSX.Element {
 		}
 	}
 
+
 	const cssWinner: React.CSSProperties = {
 		backgroundImage: `url(${winner})`,
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 	}
 
+
 	const cssloser: React.CSSProperties = {
 		...cssWinner,
 		backgroundImage: `url(${losser})`,
 	}
 	const navigate = useNavigate()
+
 
 	if (fakeGame.winner !== "") {
 		if (fakeGame.winner === userData.id) {
@@ -173,6 +182,7 @@ export default function GameWW(): JSX.Element {
 			)
 		}
 	}
+
 
 	return (
 		<div style={cssPage} tabIndex={0} onKeyDown={movePaddleLeft}>
