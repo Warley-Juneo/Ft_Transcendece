@@ -31,14 +31,12 @@ export class JogoService {
 
 		const game = new GGame(player1_id, player2_id, isRaking, hits_for_acceleration);
 		JogoService.rooms.push(game);
-		// console.log("\n\nStartGame Function\n\n id1: ", player1_id, "\n id2: ", player2_id);
 
 		await this.gameRepository.updateMatchStatus(player1_id, "PLAYING");
 		await this.gameRepository.updateMatchStatus(player2_id, "PLAYING");
 		return game;
 	}
 
-	// Y: acima + / abaixo - X: direita + / esquerda -
 	verifyCollisionPaddles(game: GGame) {
 		let verifyCollisionPaddleLeft = () => {
 
@@ -46,7 +44,6 @@ export class JogoService {
 			let half_ball_size = game.ball.size / 2;
 
 			if (game.ball.positionX <= game.paddleLeft.positionX) {
-				// console.log("\n\n\n\nHit Paddle Left: ");
 				if ((game.ball.positionY + half_ball_size) < (game.paddleLeft.positionY - half_paddle_size)) {
 					game.placarRight++;
 					return false
@@ -57,46 +54,31 @@ export class JogoService {
 				}
 				game.lastPaddleHitted = "left";
 
-				//Muda direção em X, mudando o sinal do número
 				game.ball.directionX *= -1;
 				game.paddle_hits++;
 				game.ball_refX = 0;
 				game.ball_refY = 0;
 				game.ball.hit_positionY = game.ball.positionY;
 
-				//Cálculo do ângulo
 				if (game.ball.positionY >= game.paddleLeft.positionY) {
-					// console.log("ball > paddle\n\n");
-					// console.log("padle positionY: ", game.paddleRight.positionY);
-					// console.log("ball positionY: ", game.ball.positionY);
+
 					let hit_pos = (game.ball.positionY - game.paddleLeft.positionY) / 1.00;
-					// console.log("padle hit position: ", hit_pos);
 					let paddle_half_size = game.paddleLeft.height / 2;
 					let paddle_hit = ((hit_pos * 100) / paddle_half_size) / 1.00;
-					// console.log("paddle_hit: ", paddle_hit, "\n");
 					let paddle_hit_perc = (paddle_hit / 100) / 1.00;
-					// console.log("padle hit perc", paddle_hit_perc);
 					game.ball.angle = game.ball.max_angle * paddle_hit_perc;
-					// console.log("ball angle", game.ball.angle, "\n\n");
 					game.ball.directionY = 1;
-					// game.ball.directionY_up == false
 
 				}
 				if (game.ball.positionY < game.paddleLeft.positionY) {
-					// console.log("ball < paddle\n\n");
-					// console.log("padle positionY: ", game.paddleRight.positionY);
-					// console.log("ball positionY: ", game.ball.positionY);
+
 					let hit_pos = (game.paddleLeft.positionY - game.ball.positionY) / 1.00;
-					// console.log("padle hit position: ", hit_pos);
 					let paddle_half_size = game.paddleLeft.height / 2;
 					let paddle_hit = ((hit_pos * 100) / paddle_half_size) / 1.00;
-					// console.log("paddle_hit: ", paddle_hit, "\n");
 					let paddle_hit_perc = (paddle_hit / 100) / 1.00;
-					// console.log("padle hit perc", paddle_hit_perc);
 					game.ball.angle = game.ball.max_angle * paddle_hit_perc;
-					// console.log("ball angle", game.ball.angle, "\n\n");
+
 					game.ball.directionY = -1;
-					// game.ball.directionY_up == true
 
 				}
 			}
@@ -108,7 +90,6 @@ export class JogoService {
 			let half_ball_size = game.ball.size / 2;
 
 			if (game.ball.positionX >= game.paddleRight.positionX) {
-				// console.log("\n\n\n\nHit Paddle Right:  ");
 				if ((game.ball.positionY + half_ball_size) < (game.paddleRight.positionY - half_paddle_size)) {
 					game.placarLeft++;
 					return false
@@ -119,45 +100,28 @@ export class JogoService {
 				}
 
 				game.lastPaddleHitted = "right";
-				//Muda direção em X, mudando o sinal do numero
 				game.ball.directionX *= -1;
 				game.paddle_hits++;
 				game.ball_refX = 0;
 				game.ball_refY = 0;
 				game.ball.hit_positionY = game.ball.positionY;
 
-				//Cálculo do ângulo
 				if (game.ball.positionY >= game.paddleRight.positionY) {
-					// console.log("ball > paddle\n\n");
-					// console.log("padle positionY: ", game.paddleRight.positionY);
-					// console.log("ball positionY: ", game.ball.positionY);
 					let hit_pos = (game.ball.positionY - game.paddleRight.positionY) / 1.00;
-					// console.log("padle hit position: ", hit_pos);
 					let paddle_half_size = game.paddleRight.height / 2;
 					let paddle_hit = (hit_pos * 100 / paddle_half_size) / 1.00;
-					// console.log("paddle_hit: ", paddle_hit, "\n");
 					let paddle_hit_perc = (paddle_hit / 100) / 1.00;
-					// console.log("padle hit perc", paddle_hit_perc);
 					game.ball.angle = game.ball.max_angle * paddle_hit_perc;
-					// console.log("ball angle", game.ball.angle, "\n\n");
 					game.ball.directionY = 1;
-					// game.ball.directionY_up == true
 				}
 				if (game.ball.positionY < game.paddleRight.positionY) {
-					// console.log("ball < paddle\n\n");
-					// console.log("padle positionY: ", game.paddleRight.positionY);
-					// console.log("ball positionY: ", game.ball.positionY);
 					let hit_pos = (game.paddleRight.positionY - game.ball.positionY) / 1.00;
-					// console.log("padle hit position: ", hit_pos);
 					let paddle_half_size = game.paddleRight.height / 2;
 					let paddle_hit = ((hit_pos * 100) / paddle_half_size) / 1.00;
-					// console.log("paddle_hit: ", paddle_hit, "\n");
+	
 					let paddle_hit_perc = (paddle_hit / 100) / 1.00;
-					// console.log("padle hit perc", paddle_hit_perc);
 					game.ball.angle = game.ball.max_angle * paddle_hit_perc;
-					// console.log("ball angle", game.ball.angle, "\n\n");
 					game.ball.directionY = -1;
-					// game.ball.directionY_up == false;
 				}
 			}
 			return true;
@@ -339,7 +303,6 @@ export class JogoService {
 				}
 
 				for (let id of game.participants) {
-					console.log("id: ", id)
 					await this.gameRepository.updateMatchStatus(id, "NONE");
 				}
 
@@ -353,11 +316,7 @@ export class JogoService {
 			let total_placar = game.placarLeft + game.placarRight;
 			if (game.isRaking == false && total_placar % 2 == 0) {
 				this.CreatePower(game);
-				// console.log("Game Power x: ", game.power.x);
-				// console.log("Game Power y: ", game.power.y);
-				// console.log("Game Power - size/2: ", game.power.size/2);
-				// console.log("Game Power - size/2: ", game.power.y - (game.power.size/2));
-				// console.log("Game Power + size/2: ", game.power.y + (game.power.size/2));
+
 			}
 		}
 		else {
@@ -408,7 +367,7 @@ export class JogoService {
 	async CreatePower(game: GGame) {
 		let position_x = Math.floor(Math.random() * game.window.width);
 		let position_y = Math.floor(Math.random() * game.window.height);
-		console.log("Math.random(): ", position_x, " - ", position_y);
+
 		switch (Math.round(Math.random())) {
 			case (0):
 				game.power = new AumentarPaddle(position_x, position_y);
@@ -433,7 +392,6 @@ export class JogoService {
 				else if (game.lastPaddleHitted == "right") {
 					game.power.apply(game.paddleRight);
 				}
-				console.log(game.power.x, game.power.y);
 				game.power = null;
 			}
 		}

@@ -85,7 +85,7 @@ export class AuthService {
 
     const outputLoginDto = new OutputLoginDto();
     outputLoginDto._access_token = jwt_token;
-    // console.log("auth: ", outputLoginDto._access_token);
+
     return outputLoginDto;
   }
 

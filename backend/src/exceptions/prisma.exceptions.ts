@@ -42,7 +42,6 @@ export class AllExceptionFilter implements ExceptionFilter {
 		else if (exception instanceof RequestTimeoutException) {
 
 			let obj: any = exception.getResponse()
-			// console.log("\n\n PIPE: ",obj.message, "\n\n");
 			response.status(HttpStatus.REQUEST_TIMEOUT)
 			.json({
 				statusCode: HttpStatus.REQUEST_TIMEOUT,

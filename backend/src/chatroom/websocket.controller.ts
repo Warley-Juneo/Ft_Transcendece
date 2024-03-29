@@ -257,7 +257,6 @@ export class ChatroomGateway implements OnGatewayInit, OnGatewayConnection {
 
 	@SubscribeMessage('updatePaddle')
 	async handleUpdatePaddle(client: Socket, paddle_status: any) {
-		// console.log("roomId: ", paddle_status.roomID, "\n isLeft: ", paddle_status.isLeft, "\n isUp: ", paddle_status.isUp);
 		const game = await this.jogoService.movePaddle(paddle_status.roomID, paddle_status.isLeft, paddle_status.isUp, paddle_status.pause);
 	}
 

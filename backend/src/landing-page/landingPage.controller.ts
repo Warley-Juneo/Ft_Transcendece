@@ -9,22 +9,6 @@ export class LandingPageController {
 
   @Get()
   async test(@Req() request): Promise<OutputLandinPageDto> {
-    // console.log("REQUEST User: ", request.user.userEmail);
     return await this.landingPageService.landingPage(request.user.userEmail);
   }
-
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.landingPageService.findOne(+id);
-  // }
-
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updateLandingPageDto: UpdateLandingPageDto) {
-  //   return this.landingPageService.update(+id, updateLandingPageDto);
-  // }
-
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.landingPageService.remove(+id);
-  // }
 }

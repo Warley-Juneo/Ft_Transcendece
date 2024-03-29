@@ -156,10 +156,8 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 				"ngrok-skip-browser-warning": "69420"
 			},
 		}).then((res) => {
-			console.log(res);
 			setTfaEnabled(res.data);
 		}).catch((err) => {
-			console.log(err);
 		})
 	}
 

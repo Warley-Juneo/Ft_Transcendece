@@ -173,18 +173,18 @@ export default function Game(): JSX.Element {
 				this.pntLua.setScale(0.4);
 				this.pntTerra.setScale(0.7)
 				this.sateleteChat.setScale(0.2)
-				this.sateleteChat.setAngle(295) //rotate the satelete
+				this.sateleteChat.setAngle(295)
 
-				this.physics.world.setBounds(0, 0, containerWidth, containerHeight); // Define os limites do mundo para que a nave não possa sair da tela
-				this.setupColliders(); // Configura os colisores para que possamos detectar colisões entre a nave e os planetas
+				this.physics.world.setBounds(0, 0, containerWidth, containerHeight);
+				this.setupColliders();
 				this.checkResize();
 			}
 
 			update() {
-				// console.log(game.scale.width, game.scale.height)
-				const curso = this.input.keyboard?.createCursorKeys(); // event listener para as teclas de seta
 
-				if (!curso) return // Se não houver teclas de seta, retorne;
+				const curso = this.input.keyboard?.createCursorKeys();
+
+				if (!curso) return
 
 				if (curso.down.isDown || curso.left.isDown || curso.right.isDown || curso.up.isDown) {
 					const { x, y } = this.nave;
