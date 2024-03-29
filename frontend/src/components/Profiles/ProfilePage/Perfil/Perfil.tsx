@@ -20,11 +20,10 @@ export default function InformationsUser() {
 				"ngrok-skip-browser-warning": "69420"
 			}
 		})
-			.then((response) => {
-				setInfosUser(response.data);
-			}
-			).catch((error) => {
-			})
+		.then((res) => {
+			setInfosUser(res.data);
+		})
+		.catch(() => {})
 	}
 
 	useEffect(() => {

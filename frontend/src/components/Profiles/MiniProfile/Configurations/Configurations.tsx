@@ -40,8 +40,6 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 				},
 			}).then((res) => {
 				setTfaEnabled(false);
-			}).catch((err) => {
-
 			})
 		}
 		getQRCODE();
@@ -65,9 +63,7 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 		}).then((res) => {
 			setHandleOption(!handleOption);
 			userData.updateDataUser();
-		}).catch((err) => {
-
-		})
+		}).catch(() => {})
 	}
 
 	const editProfile = (event: FormEvent<HTMLFormElement>): void => {
@@ -84,10 +80,9 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 				"ngrok-skip-browser-warning": "69420",
 				'Content-Type': 'multipart/form-data' // Defina o tipo de conteúdo como multipart/form-data
 			}
-		}).then((res) => {
+		}).then(() => {
 			userData.updateDataUser();
-		}).catch((err) => {
-		});
+		}).catch(() => {});
 	};
 
 
@@ -121,8 +116,7 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 			}
 		}).then((res) => {
 			setQRCODE(res.data);
-		}).catch((err) => {
-		})
+		}).catch(() => {})
 	}
 
 	const verifyTwoFA = () => {
@@ -143,9 +137,7 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 				setTfaEnabled(true);
 				setShow(false);
 			}
-		}).catch((err) => {
-
-		});
+		}).catch(() => {});
 	}
 
 	const [tfaEnabled, setTfaEnabled] = useState<boolean>(userData.user.twoFA);
@@ -157,8 +149,7 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 			},
 		}).then((res) => {
 			setTfaEnabled(res.data);
-		}).catch((err) => {
-		})
+		}).catch(() => {})
 	}
 
 	return (

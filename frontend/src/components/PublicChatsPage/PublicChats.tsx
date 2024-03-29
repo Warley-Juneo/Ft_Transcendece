@@ -39,8 +39,7 @@ export default function PageChats(props: propsPageChats) {
 			}
 		}).then((res) => {
 			setChatList(res.data.chatrooms)
-		}).catch((err) => {
-		})
+		}).catch(() => {})
 	}
 
 	const getListPrivateChats = () => {
@@ -51,8 +50,7 @@ export default function PageChats(props: propsPageChats) {
 			}
 		}).then((res) => {
 			setChatList(res.data.chatrooms)
-		}).catch((err) => {
-		})
+		}).catch(() => {})
 	}
 
 

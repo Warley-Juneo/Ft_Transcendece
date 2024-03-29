@@ -33,9 +33,9 @@ function Options({ getPlayers }: { getPlayers: (route: string) => void }) {
 					"ngrok-skip-browser-warning": "69420"
 				},
 			})
-				.then((res) => {
-					getPlayers(URLS_MiniPerfilPlayers.personal);
-				})
+			.then(() => {
+				getPlayers(URLS_MiniPerfilPlayers.personal);
+			}).catch(() => {})
 		}
 	}
 
@@ -49,9 +49,9 @@ function Options({ getPlayers }: { getPlayers: (route: string) => void }) {
 					"ngrok-skip-browser-warning": "69420"
 				},
 			})
-				.then((res) => {
-					getPlayers(URLS_MiniPerfilPlayers.personal);
-				})
+			.then((res) => {
+				getPlayers(URLS_MiniPerfilPlayers.personal);
+			}).catch(() => { })
 		}
 	}
 

@@ -3,6 +3,7 @@ import BarDataUsers from "./BarDataUsers/BarDataUsers"
 import { useNavigate, useParams } from "react-router-dom"
 import { UserData } from "../../InitialPage/Contexts/Contexts"
 import winner from "../../../assets/game/winner.png"
+import losser from "../../../assets/game/losser.jpg"
 
 type GamePongProps = {
 	ball: { positionX: number, positionY: number, size: number },
@@ -150,14 +151,27 @@ export default function GameWW(): JSX.Element {
 		backgroundSize: 'cover',
 		backgroundPosition: 'center',
 	}
+
+	const cssloser: React.CSSProperties = {
+		...cssWinner,
+		backgroundImage: `url(${losser})`,
+	}
 	const navigate = useNavigate()
 
 	if (fakeGame.winner !== "") {
-		return (
-			<div className="vh-100 p-5" style={cssWinner}>
-				<button className="btn btn-danger" onClick={() => navigate('/game')}>Exit Game</button>
-			</div>
-		)
+		if (fakeGame.winner === userData.id) {
+			return (
+				<div className="vh-100 p-5" style={cssWinner}>
+					<button className="btn btn-danger" onClick={() => navigate('/game')}>Exit Game</button>
+				</div>
+			)
+		} else {
+			return (
+				<div className="vh-100 p-5" style={cssloser}>
+					<button className="btn btn-danger" onClick={() => navigate('/game')}>Exit Game</button>
+				</div>
+			)
+		}
 	}
 
 	return (

@@ -98,8 +98,7 @@ export default function ChatPublic(props: propsPageChats) {
 			setDataChat(response.data)
 			addNewMember(response.data.id, response.data)
 			userData.socket?.emit("open-group", { chatId: response.data.id });
-		}).catch((error) => {
-		})
+		}).catch(() => {})
 	}
 
 	useEffect(() => {

@@ -31,8 +31,7 @@ export default function LoginFake(): JSX.Element {
 			Cookies.set('email', res.data._email);
 			navigate('/game/', { replace: true });
 		}
-		).catch((err) => {
-		})
+		).catch(() => {})
 	}
 
 	return (

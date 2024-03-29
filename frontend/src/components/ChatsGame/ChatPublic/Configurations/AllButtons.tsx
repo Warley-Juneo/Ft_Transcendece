@@ -120,10 +120,9 @@ export default function AllButtons(): JSX.Element {
 				Authorization: Cookies.get("jwtToken"),
 				"ngrok-skip-browser-warning": "69420"
 			}
-		}).then((res) => {
-		}).catch((err) => {
 		})
-
+		.then(() => {})
+		.catch(() => {})
 	}
 	const changePassword = (event: FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
@@ -138,9 +137,9 @@ export default function AllButtons(): JSX.Element {
 				Authorization: Cookies.get("jwtToken"),
 				"ngrok-skip-browser-warning": "69420"
 			}
-		}).then((res) => {
-		}).catch((err) => {
 		})
+		.then(() => {})
+		.catch(() => {})
 	}
 	return (
 		<div className="p-3 text-start position-relative">

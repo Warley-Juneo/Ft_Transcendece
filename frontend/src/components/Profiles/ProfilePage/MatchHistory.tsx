@@ -23,13 +23,13 @@ export default function MatchHistory({ userId }: { userId: string }) {
 			}
 		}).then((response) => {
 			setMatchHistory(response.data);
-		}).catch((error) => {})
+		}).catch(() => {})
 	}
 	useEffect(() => {
 		getMatchHistory();
 	}, []);
 
-	if (matchHistory.length == 0) {
+	if (matchHistory.length === 0) {
 		return (
 			<div className='d-flex p-2 text-center p-5 justify-content-center align-items-center h-100'>
 				<p style={{fontSize: '5rem'}}>O jogador não possui nenhuma partida</p>

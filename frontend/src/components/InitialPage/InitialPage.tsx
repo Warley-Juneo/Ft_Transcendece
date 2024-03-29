@@ -38,7 +38,7 @@ export default function InicialPage() {
 		}).then((res) => {
 			res.data.avatar = `data:image/jpeg;base64, ${res.data.avatar}`
 			return res.data;
-		})
+		});
 	}
 
 	function setStatusOnline(res: t_dataUser) {

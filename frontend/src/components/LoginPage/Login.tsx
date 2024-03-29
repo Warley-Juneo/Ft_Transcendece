@@ -23,10 +23,9 @@ export function Login() {
 				Cookies.set('jwtToken', response.data._access_token);// set expires time
 				Cookies.set('email', response.data._email);
 				return response.data
-			}).then((data) => {
-				verifyEnabled()
-			}).catch((err) => {
 			})
+			.then(() => {verifyEnabled()})
+			.catch(() => {})
 		}
 		return undefined;
 	}
@@ -46,8 +45,7 @@ export function Login() {
 		}).then((res) => {
 			if (res.data === true)
 				navigate('/game')
-		}).catch((err) => {
-		});
+		}).catch(() => {});
 	}
 
 	const verifyEnabled = () => {
@@ -62,14 +60,12 @@ export function Login() {
 			} else {
 				navigate('/game')
 			}
-		}).catch((err) => {
-		})
+		}).catch(() => {})
 	}
 
 
 	useEffect(() => {
 		axios_connect();
-
 	}, []);
 
 	return (

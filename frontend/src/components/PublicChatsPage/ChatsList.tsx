@@ -26,7 +26,7 @@ export default function ChatList(props: propsChatList) {
 			},
 		}).then((response) => {
 			return response.data;
-		})
+		});
 	}
 
 	const getDataChatPublic = (chatName: string) => {
