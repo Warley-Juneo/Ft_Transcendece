@@ -26,7 +26,6 @@ export function Login() {
 			}).then((data) => {
 				verifyEnabled()
 			}).catch((err) => {
-				console.log(err);
 			})
 		}
 		return undefined;
@@ -48,12 +47,10 @@ export function Login() {
 			if (res.data === true)
 				navigate('/game')
 		}).catch((err) => {
-			console.log(err);
 		});
 	}
 
 	const verifyEnabled = () => {
-		console.log("verifyEnabled")
 		axios.get(`${process.env.REACT_APP_HOST_URL}/2FA/verifyStatus`, {
 			headers: {
 				Authorization: Cookies.get('jwtToken'),
@@ -66,7 +63,6 @@ export function Login() {
 				navigate('/game')
 			}
 		}).catch((err) => {
-			console.log(err);
 		})
 	}
 

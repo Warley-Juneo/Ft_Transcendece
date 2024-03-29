@@ -17,7 +17,6 @@ export default function InfosUser({ nickName }: { nickName: string }): JSX.Eleme
 				"ngrok-skip-browser-warning": "69420",
 			}
 		}).then((response) => {
-			console.log(response.data);
 			setInfosUser(response.data);
 		}
 		).catch((error) => {

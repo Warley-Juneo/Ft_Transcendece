@@ -55,7 +55,6 @@ export default function GameWW(): JSX.Element {
 
 	useEffect(() => {
 		userData.socket?.on('updateGame', (data: GamePongProps) => {
-			console.log(data)
 			setFakeGame(data)
 		})
 	}, [])

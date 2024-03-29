@@ -143,7 +143,6 @@ export default function Game(): JSX.Element {
 				// Adiciona um ouvinte de evento para o redimensionamento da janela
 				window.addEventListener('resize', () => {
 					this.resize();
-					console.log('resize')
 				});
 
 			}

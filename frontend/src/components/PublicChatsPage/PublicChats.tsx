@@ -40,7 +40,6 @@ export default function PageChats(props: propsPageChats) {
 		}).then((res) => {
 			setChatList(res.data.chatrooms)
 		}).catch((err) => {
-			console.log(err)
 		})
 	}
 
@@ -52,9 +51,7 @@ export default function PageChats(props: propsPageChats) {
 			}
 		}).then((res) => {
 			setChatList(res.data.chatrooms)
-			console.log("Lista: privado", res.data.chatrooms)
 		}).catch((err) => {
-			console.log(err)
 		})
 	}
 
@@ -121,8 +118,6 @@ export default function PageChats(props: propsPageChats) {
 		width: '75%',
 		padding: '7%'
 	}
-
-	console.log("vou printar a lista de chats");
 
 	if (selectedChat.click === true) return <ChatPublic
 		chatName={selectedChat.chatName}

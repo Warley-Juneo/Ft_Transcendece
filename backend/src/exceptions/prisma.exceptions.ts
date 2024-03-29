@@ -22,7 +22,6 @@ export class AllExceptionFilter implements ExceptionFilter {
 		else if (exception instanceof BadRequestException) {
 
 			let obj: any = exception.getResponse()
-			console.log("\n\n PIPE BadRequest: ",obj.message, "\n\n");
 			response.status(HttpStatus.BAD_REQUEST)
 			.json({
 				statusCode: HttpStatus.BAD_REQUEST,
@@ -33,7 +32,6 @@ export class AllExceptionFilter implements ExceptionFilter {
 		else if (exception instanceof UnauthorizedException) {
 
 			let obj: any = exception.getResponse()
-			console.log("\n\n PIPE Unauthorized: ",obj,"\n\n", HttpStatus.UNAUTHORIZED, "\n\n");
 			response.status(HttpStatus.UNAUTHORIZED)
 			.json({
 				statusCode: HttpStatus.UNAUTHORIZED,

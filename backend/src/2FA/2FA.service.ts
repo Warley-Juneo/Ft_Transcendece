@@ -37,7 +37,6 @@ export class TwoFactorauthenticationService {
 			}
 		}
 		catch (error) {
-			console.log(error);
 			return false;
 		}
     }

@@ -6,8 +6,7 @@ import { Socket } from 'socket.io';
 export class UsernameInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
     const client = context.switchToWs().getClient<Socket>();
-    console.log("socketIDXXXXX: ",client.id);
-    const username = "Alguém";/* Obtenha o username do cliente de alguma forma */
+    const username = "Alguém";
     client['username'] = username;
     return next.handle();
   }

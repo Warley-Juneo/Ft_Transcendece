@@ -45,7 +45,6 @@ export default function ChatPrivate(props: propsChatPrivate) {
 				data = JSON.parse(data);
 				setMessages((messages) => [...messages, data]);
 			} catch (error) {
-				console.log("error no cat: ", error);
 			}
 		});
 		return () => {

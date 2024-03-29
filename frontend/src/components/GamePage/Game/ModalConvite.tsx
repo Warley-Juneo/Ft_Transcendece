@@ -27,7 +27,6 @@ export function ModalConvite(props: propsModalConvite): JSX.Element {
 		props.setOpenChat(false);
 	}
 
-	console.log('modal convite')
 	return (
 		<Modal show={true} onHide={() => props.setOpenChat(false)}>
 			<Modal.Header closeButton style={cssBackgroundModal}>

@@ -24,7 +24,6 @@ export default function MiniProfile(props: propsMiniProfile) {
 		}).then((res) => {
 			setPlayers(res.data);
 		}).catch((err) => {
-			console.log(err);
 		})
 	}
 

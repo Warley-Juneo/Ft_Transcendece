@@ -17,7 +17,6 @@ export default function MessagensArea(): JSX.Element {
 				data = JSON.parse(data) as Messages;
 				setMessages((prevMessagens) => [...prevMessagens, data]);
 			} catch (error) {
-				console.log(error);
 			}
 		});
 		return () => {

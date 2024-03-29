@@ -18,7 +18,6 @@ export class AuthService {
   ) {}
 
   async validateUserApi42(authLoginDto: AuthLoginDto): Promise<string> {
-    console.log("validateUser42");
     const clientId = process.env.UID;
     const secret = process.env.SECRET;
 
@@ -42,7 +41,6 @@ export class AuthService {
   }
 
   async getUserInfoApi42(accessToken: string): Promise<any> {
-    console.log("getUserInfo42");
     const userApiInfo: Observable<any> = this.httpService.get(
       process.env.API42_USER_INFO,
       {
@@ -57,9 +55,7 @@ export class AuthService {
   }
 
   async verifyUser(userInfo: any): Promise<any> {
-    console.log("verifyUser");
     let user: User = await this.usersService.findUserAuth(userInfo.email);
-    console.log("User: ", user);
     if (!user) {
       const createUserDto = new CreateUserDto();
       createUserDto.login = userInfo.login;
@@ -75,7 +71,6 @@ export class AuthService {
   }
 
   async jwtSign(user: any): Promise<string> {
-    console.log("jwtSign");
     const payload = { sub: user.id, userEmail: user.email };
     let jwt_token = await this.jwtService.signAsync(payload);
     return (jwt_token);

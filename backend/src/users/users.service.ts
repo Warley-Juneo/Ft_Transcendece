@@ -18,7 +18,6 @@ export class UsersService {
 
 	async createUser(dto: CreateUserDto): Promise<User> {
 		let pathfile = path.join(process.cwd(), "src/", "avatarUploads/", "standard.jpg")
-		console.log("pathfile: ", pathfile);
 		const fileContent = fs.readFileSync(pathfile, 'base64');
 		dto.avatar = fileContent;
 		let user = await this.userRepository.createUser(dto);
@@ -152,7 +151,6 @@ export class UsersService {
 			const objAux = { ...obj, ladder: position }
 			outputLadderDto.push(new UserLadderDto(objAux));
 		};
-		console.log("RANKING DTO", outputLadderDto);
 		return outputLadderDto;
 	}
 

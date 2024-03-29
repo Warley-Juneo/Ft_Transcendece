@@ -87,7 +87,6 @@ export default function AllButtons(): JSX.Element {
 		if (event.key !== 'Enter') return;
 		const userId = getUserId(event.currentTarget.value);
 
-		console.log("BanMember: ");
 		if (userId) {
 			let obj = {
 				my_id: dataUser.id,
@@ -95,7 +94,6 @@ export default function AllButtons(): JSX.Element {
 				chat_name: name,
 				chat_id: id,
 			}
-			console.log("obj: ", obj);
 			userData.socket?.emit('ban-member-group', obj);
 		}
 	}
@@ -109,13 +107,11 @@ export default function AllButtons(): JSX.Element {
 			password: event.currentTarget.value,
 			chatId: id,
 		}
-		console.log(obj);
 		userData.socket?.emit('delete-group', obj);
 	}
 
 	const removePassword = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key !== "Enter") return;
-		console.log(event.currentTarget.value)
 		axios.post(`${process.env.REACT_APP_HOST_URL}/chatroom/remove-password-group`, {
 			chat_name: name,
 			password: event.currentTarget.value,
@@ -125,9 +121,7 @@ export default function AllButtons(): JSX.Element {
 				"ngrok-skip-browser-warning": "69420"
 			}
 		}).then((res) => {
-			console.log("Resposta alter senha: ", res.data);
 		}).catch((err) => {
-			console.log("Resposta alter Error: ", err);
 		})
 
 	}
@@ -145,9 +139,7 @@ export default function AllButtons(): JSX.Element {
 				"ngrok-skip-browser-warning": "69420"
 			}
 		}).then((res) => {
-			console.log("Resposta alter senha: ", res.data);
 		}).catch((err) => {
-			console.log("Resposta alter Error: ", err);
 		})
 	}
 	return (

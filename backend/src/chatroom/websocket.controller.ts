@@ -51,11 +51,9 @@ export class ChatroomGateway implements OnGatewayInit, OnGatewayConnection {
 	@WebSocketServer() server: Server;
 
 	afterInit(server: Server) {
-		console.log('Initialized!');
 	}
 
 	async handleConnection(client: Socket) {
-		console.log("Client connected: ", client.id, client.handshake.auth.user);
 		if (client.handshake.auth.user_id) {
 			await this.userService.userSocketConnect(client.handshake.auth.user_id);
 		}
@@ -67,12 +65,10 @@ export class ChatroomGateway implements OnGatewayInit, OnGatewayConnection {
 		if (client.handshake.auth.user_id) {
 			user = await this.userService.userSocketDisconnect(client.handshake.auth.user_id);
 		}
-		console.log("Client disconnect: ",	user);
 	}
 
 	@SubscribeMessage('save-socket')
 	async saveSocket(client: Socket, userId: string) {
-		console.log("userId: ", userId, "\nsocketId: ", client.id);
 	}
 
 	@SubscribeMessage('create-group')
@@ -245,7 +241,6 @@ export class ChatroomGateway implements OnGatewayInit, OnGatewayConnection {
 
 	@SubscribeMessage('disconnect-user')
 	async handleDisconnectUser(client: Socket, dto: DisconnectUserDto): Promise<any> {
-		console.log("Disconnect-user Route");
 		const game = await this.jogoService.disconnectUser(dto);
 		this.server.to(game?.roomID).emit("updateGame", game);
 		this.server.emit('checkStatus', '');

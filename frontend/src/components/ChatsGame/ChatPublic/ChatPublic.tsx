@@ -99,7 +99,6 @@ export default function ChatPublic(props: propsPageChats) {
 			addNewMember(response.data.id, response.data)
 			userData.socket?.emit("open-group", { chatId: response.data.id });
 		}).catch((error) => {
-			console.log(error)
 		})
 	}
 
@@ -126,7 +125,6 @@ export default function ChatPublic(props: propsPageChats) {
 			getDataChat();
 		})
 		userData.socket?.on('updateChat', (data: any) => {
-			console.log("update");
 			getDataChat();
 		})
 

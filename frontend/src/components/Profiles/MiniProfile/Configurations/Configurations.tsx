@@ -41,7 +41,7 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 			}).then((res) => {
 				setTfaEnabled(false);
 			}).catch((err) => {
-				console.log(err);
+
 			})
 		}
 		getQRCODE();
@@ -87,7 +87,6 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 		}).then((res) => {
 			userData.updateDataUser();
 		}).catch((err) => {
-			console.log(err);
 		});
 	};
 
@@ -123,7 +122,6 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 		}).then((res) => {
 			setQRCODE(res.data);
 		}).catch((err) => {
-			console.log(err);
 		})
 	}
 
@@ -132,7 +130,6 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 		if (token.value === '') {
 			return;
 		}
-		console.log("Verificando 2FA");
 		axios.post(`${process.env.REACT_APP_HOST_URL}/2FA/validate`, {
 			token: token.value,
 		}, {
@@ -147,7 +144,7 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 				setShow(false);
 			}
 		}).catch((err) => {
-			console.log(err);
+
 		});
 	}
 
