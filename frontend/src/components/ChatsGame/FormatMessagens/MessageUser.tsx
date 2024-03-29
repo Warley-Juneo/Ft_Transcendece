@@ -33,7 +33,7 @@ export default function MessageUser(props: propsMessageUser): JSX.Element {
 				<p className="d-flex justify-content-end" style={cssDetails}>{props.dataFormating}</p>
 			</div>
 			<img style={cssPhoto}
-				src={`data:image/png;base64,${props.avatarUrl}`}
+				src={`data:image/png;base64, ${props.avatarUrl}`}
 				alt='foto'
 				onClick={() => props.showDinamicProfile(props.nickname, props.id)}
 			/>

@@ -61,7 +61,7 @@ export default function ChatPrivate(props: propsChatPrivate) {
 	}
 
 	return (
-		<div className='text-white chat d-flex flex-column bg-degrader rounded'>
+		<div className='text-white chat d-flex flex-column bg-degrader rounded' style={{zIndex: 2000}}>
 			<TitleChatPrivate nickname={props.nick_name} avatar={props.avatar} />
 			<div className='p-2 overflow-auto mt-auto text-black' id='messagens-chat'>
 				<FormatMessages messagens={messages} user={userData} messageErr={messageErr}/>

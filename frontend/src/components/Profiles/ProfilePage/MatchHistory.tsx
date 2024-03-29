@@ -32,7 +32,7 @@ export default function MatchHistory({ userId }: { userId: string }) {
 	if (matchHistory.length === 0) {
 		return (
 			<div className='d-flex p-2 text-center p-5 justify-content-center align-items-center h-100'>
-				<p style={{fontSize: '5rem'}}>O jogador não possui nenhuma partida</p>
+				<p className="fs-1">O jogador não possui nenhuma partida</p>
 			</div>
 		)
 	}

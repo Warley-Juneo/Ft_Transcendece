@@ -16,7 +16,8 @@ export default function InfosUser({ nickName }: { nickName: string }): JSX.Eleme
 				Authorization: Cookies.get('jwtToken'),
 				"ngrok-skip-browser-warning": "69420",
 			}
-		}).then((response) => {
+		})
+		.then((response) => {
 			setInfosUser(response.data);
 		}
 		).catch(() => {})

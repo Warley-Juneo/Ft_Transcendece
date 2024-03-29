@@ -76,7 +76,7 @@ export default function ListFriends(props: PropsListFriends) {
 						<div className='d-flex hover' key={play.id}>
 							<img
 								className="foto-list-friends"
-								src={`data:image/jpeg;base64, ${play.avatar}`}
+								src={`data:image/png;base64, ${play.avatar}`}
 								alt='foto'
 								onClick={() => clickPhoto(play.id, play.nickname)}
 							/>
@@ -91,11 +91,13 @@ export default function ListFriends(props: PropsListFriends) {
 									player_id={play.id}
 								/>
 							</div>
-							<IoGameControllerOutline
-								size={30}
-								className='text-warning'
-								onClick={() => createMatch(play.id)}
-							/>
+							<div className='d-flex align-items-center me-1'>
+								<IoGameControllerOutline
+									size={30}
+									className='text-warning'
+									onClick={() => createMatch(play.id)}
+								/>
+							</div>
 						</div>
 					)
 				})}

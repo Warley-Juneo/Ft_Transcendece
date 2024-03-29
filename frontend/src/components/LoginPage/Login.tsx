@@ -17,6 +17,7 @@ export function Login() {
 		if (code) {
 			axios.post(`${process.env.REACT_APP_HOST_URL}/auth`, {
 				authCode: code,
+				"ngrok-skip-browser-warning": "69420",
 			}, {
 				timeout: 5000,
 			}).then((response) => {
