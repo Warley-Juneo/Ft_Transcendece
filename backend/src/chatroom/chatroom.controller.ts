@@ -1,7 +1,7 @@
 import { Controller, Body, Post, Req, Get, Delete, Query } from '@nestjs/common';
 import { ChangePasswordDto, CreateChatroomDto, InputChatroomDto, RemovePasswordDto } from './dto/input.dto';
 import { ChatroomService } from './chatroom.service';
-import { CreateDirectChatroomDto, AddChatUserDto } from './dto/input.dto';
+import { CreateDirectChatroomDto, ChatUserDto } from './dto/input.dto';
 import { ChatroomsDto, OutputDirectMessageDto, UniqueChatroomDto } from './dto/output.dto';
 
 @Controller('chatroom')
