@@ -10,6 +10,17 @@ export class ChatroomRepository {
 	constructor(private readonly prisma: PrismaService) { }
 
 	async createChatroom(userId: string, dto: CreateChatroomDto): Promise<void> {
+		let exist = await this.prisma.chatRoom.findUnique(
+			{
+				where: {
+					name: dto.name,
+				},
+			}
+		);
+
+		if (exist) {
+			return;
+		}
 
 		let chat = await this.prisma.chatRoom.create({
 			data: {
