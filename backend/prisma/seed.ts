@@ -14,6 +14,7 @@ async function main() {
 		  last_name: "Silva",
 		  nickname: "Silvão",
 		  avatar: "https://i.pinimg.com/originals/e7/3a/7c/e73a7c77c2430210674a0c0627d9ca76.jpg",
+		  avatar_name: "Silvão", 
 		  points: 7,
 		},
 	  });
@@ -26,6 +27,7 @@ async function main() {
 		  last_name: "Pereira",
 		  nickname: "Firmeza",
 		  avatar: "https://i.pinimg.com/originals/e7/3a/7c/e73a7c77c2430210674a0c0627d9ca76.jpg",
+		  avatar_name: "Firmeza", 
 		  points: 0,
 		  friends: {
 			connect: [
@@ -43,6 +45,7 @@ async function main() {
 		  last_name: "Lacrux",
 		  nickname: "Mia",
 		  avatar: "https://i.pinimg.com/originals/e7/3a/7c/e73a7c77c2430210674a0c0627d9ca76.jpg",
+		  avatar_name: "Mia",
 		  points: 2,
 		  friends: {
 			connect: [
@@ -60,6 +63,7 @@ async function main() {
 		  last_name: "Giusepe faggion",
 		  nickname: "fagiusep",
 		  avatar: "https://i.pinimg.com/originals/e7/3a/7c/e73a7c77c2430210674a0c0627d9ca76.jpg",
+		  avatar_name: "Fausto",
 		  points: 12,
 		  friends: {
 			connect: [
@@ -77,6 +81,7 @@ async function main() {
 		  last_name: "Wallas Ferreira Santos",
 		  nickname: "wwallas-",
 		  avatar: "https://i.pinimg.com/originals/e7/3a/7c/e73a7c77c2430210674a0c0627d9ca76.jpg",
+		  avatar_name: "Wagraton",
 		  points: 1,
 		  friends: {
 			connect: [
