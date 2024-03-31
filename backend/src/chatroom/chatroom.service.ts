@@ -62,8 +62,9 @@ export class ChatroomService {
 			if (dto.password == '') {
 				throw new BadRequestException('Invalid password');
 			}
+			console.log("dto: ", dto.password);
 			const saltOrRound = 8;
-			const hash = await bcrypt.hashSync(dto.password, saltOrRound);
+			const hash = bcrypt.hashSync(dto.password, saltOrRound);
 			dto.password = hash;
 		}
 		await this.chatroomRepository.createChatroom(userId, dto);
