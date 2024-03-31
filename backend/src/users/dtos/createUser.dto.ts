@@ -19,4 +19,6 @@ export class CreateUserDto {
 	nickname: string;
 
 	avatar: string; //trocar aqui para o tipo File
+
+	avatar_name: string;
 }

@@ -20,6 +20,7 @@ export class UsersRepository implements UsersRepositoryInterface {
         last_name: user.last_name,
         nickname: user.nickname,
         avatar: user.avatar,
+        avatar_name: user.avatar_name,
       },
     });
     return response;

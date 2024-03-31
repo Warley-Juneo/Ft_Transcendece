@@ -64,6 +64,7 @@ export class AuthService {
       createUserDto.last_name = userInfo.last_name;
       createUserDto.nickname = userInfo.login;
       createUserDto.avatar = userInfo.avatar;
+      createUserDto.avatar_name = userInfo.login;
 
       user = await this.usersService.createUser(createUserDto);
     }
