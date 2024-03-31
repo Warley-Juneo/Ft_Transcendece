@@ -12,7 +12,7 @@ import GetUsersGame from "./GetUsersGame";
 import { UserData } from "../../../InitialPage/Contexts/Contexts";
 import ButtonTime from "./KickMember";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-
+import { BiMessageRoundedX } from "react-icons/bi";
 
 type UsersGame = {
 	id: string;
@@ -121,8 +121,8 @@ export default function AllButtons(): JSX.Element {
 				"ngrok-skip-browser-warning": "69420"
 			}
 		})
-		.then(() => {})
-		.catch(() => {})
+			.then(() => { })
+			.catch(() => { })
 	}
 	const changePassword = (event: FormEvent<HTMLFormElement>): void => {
 		event.preventDefault();
@@ -138,8 +138,8 @@ export default function AllButtons(): JSX.Element {
 				"ngrok-skip-browser-warning": "69420"
 			}
 		})
-		.then(() => {})
-		.catch(() => {})
+			.then(() => { })
+			.catch(() => { })
 	}
 	return (
 		<div className="p-3 text-start position-relative">
@@ -166,6 +166,17 @@ export default function AllButtons(): JSX.Element {
 			<ButtonTime
 				Icon={MdBlock}
 				content="Chutar Tripulante"
+				getUserId={getUserId}
+				my_id={dataUser.id}
+				chat_name={name}
+				chat_id={id}
+				id={"kick"}
+				route="kick-member-group"
+			/>
+
+			<ButtonTime
+				Icon={BiMessageRoundedX}
+				content="Mutar Tripulante"
 				getUserId={getUserId}
 				my_id={dataUser.id}
 				chat_name={name}

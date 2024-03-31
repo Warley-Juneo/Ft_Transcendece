@@ -64,14 +64,12 @@ export default function ButtonTime(props: KickMemberProps): JSX.Element {
 							name="flexRadioDefault"
 							id={props.id + '1'}
 							ref={kickDay}
-							checked>
+							defaultChecked >
 						</input>
 					</div>
 					<InputButton function={kickedMember} />
 				</div>
 			}
-
 		</>
-
 	)
 }
