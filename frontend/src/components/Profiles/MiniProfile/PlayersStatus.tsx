@@ -71,14 +71,13 @@ export default function Status(props: PropsStatus): JSX.Element {
 			...cssIcons,
 			zIndex: '1',
 		}
-
 		return (
 			<>
-				{!props.mute.find((item) => item.id === props.my_id) ? null :
-					<GoMute key={props.my_id + '1'} style={cssIcons} />
+				{!props.mute.find((item) => item.id === props.player_id) ? null :
+					<GoMute key={props.player_id + '1'} style={cssIcons} />
 				}
-				{!props.admin.find((item) => item.id === props.my_id) ? null :
-					<MdOutlineAdminPanelSettings key={props.my_id} style={cssSecond} />
+				{!props.admin.find((item) => item.id === props.player_id) ? null :
+					<MdOutlineAdminPanelSettings key={props.player_id} style={cssSecond} />
 				}
 				{!(props.match_status === "WATCHING") ? null :
 					<FaEye style={cssWatch}/>
