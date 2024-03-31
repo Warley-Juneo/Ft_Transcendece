@@ -86,7 +86,6 @@ export class UsersService {
 	
 	async updateProfile(user_id: string, dto: UpdateProfileDto): Promise<UserResumeDto> {
 		
-		console.log("dto.....: ... ", dto);
 		let user: User;
 
 		let where_filter = {
