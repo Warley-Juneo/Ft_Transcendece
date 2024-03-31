@@ -98,8 +98,6 @@ export class UsersService {
 		} 	
 		user = await this.userRepository.updateUser(where_filter, data_filter);
 
-		let newDto = new UserResumeDto(user);
-		console.log("newDto: ", newDto); 
 		return new UserResumeDto(user);
 	}
 
