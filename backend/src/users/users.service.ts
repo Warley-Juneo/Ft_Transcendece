@@ -77,7 +77,7 @@ export class UsersService {
 			twoFA: dto.twoFA,
 		};
 		if (dto.nick_name) {
-			data_filter.nickname = dto.nick_name;
+			data_filter.avatar_name = dto.nick_name;
 		}
 		let user: User = await this.userRepository.updateUser(user_id, data_filter);
 		return new UserResumeDto(user);
