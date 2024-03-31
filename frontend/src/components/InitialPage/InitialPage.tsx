@@ -36,6 +36,7 @@ export default function InicialPage() {
 				"ngrok-skip-browser-warning": "69420"
 			}, timeout: 5000
 		}).then((res) => {
+			console.log("response...: ", res.data);
 			res.data.avatar = `data:image/jpeg;base64, ${res.data.avatar}`
 			return res.data;
 		});

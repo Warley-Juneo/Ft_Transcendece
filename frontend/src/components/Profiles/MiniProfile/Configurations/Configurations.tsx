@@ -50,12 +50,10 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 		verifyEnabled();
 	}, []);
 
-	function sendInfosUserBack(info: infoUpdate) {
-		if (userData.user.twoFA === false && info.twoFA === true) {
-			getQRCODE();
-		}
-
-		axios.post(`${process.env.REACT_APP_HOST_URL}/users/updateProfile`, info, {
+	function sendInfosUserBack(nickname: string) {
+		
+		console.log("nickname: ",nickname);
+		axios.post(`${process.env.REACT_APP_HOST_URL}/users/updateProfile`, {avatar_name: nickname}, {
 			headers: {
 				Authorization: Cookies.get('jwtToken'),
 				"ngrok-skip-browser-warning": "69420"
@@ -71,18 +69,24 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 		const form = new FormData(event.currentTarget);
 
 		// Verifique se o arquivo está sendo recuperado corretamente
-		const avatarFile = form.get('avatar') as File;
+		// const avatarFile = form.get('avatar') as File;
 
 		// Tente enviar FormData diretamente
-		axios.post(`${process.env.REACT_APP_HOST_URL}/users/upload-avatar`, form, {
-			headers: {
-				Authorization: Cookies.get('jwtToken'),
-				"ngrok-skip-browser-warning": "69420",
-				'Content-Type': 'multipart/form-data' // Defina o tipo de conteúdo como multipart/form-data
-			}
-		}).then(() => {
-			userData.updateDataUser();
-		}).catch(() => {});
+		if (form.get('avatar')) {
+
+			axios.post(`${process.env.REACT_APP_HOST_URL}/users/upload-avatar`, form, {
+				headers: {
+					Authorization: Cookies.get('jwtToken'),
+					"ngrok-skip-browser-warning": "69420",
+					'Content-Type': 'multipart/form-data' // Defina o tipo de conteúdo como multipart/form-data
+				}
+			}).then(() => {
+				userData.updateDataUser();
+			}).catch(() => {});
+		}
+		if (form.get('nickname')) {
+			sendInfosUserBack(form.get('nickname') as string);
+		}
 	};
 
 

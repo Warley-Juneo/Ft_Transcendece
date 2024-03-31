@@ -1,10 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { ConsoleLogger, Injectable } from '@nestjs/common';
 import { User } from '@prisma/client';
 import { UsersRepository } from './users.repository';
 import { UserResumeDto, UserProfileDto, UserLadderDto } from './dtos/output.dtos';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { GameService } from 'src/game/game.service';
-import { AddFriendDto, ProfileDto, UpdateCoinsDto, UpdateProfileDto } from './dtos/input.dtos';
+import { AddFriendDto, ProfileDto, UpdateCoinsDto, UpdateProfileDto, UpdateTwoFADto } from './dtos/input.dtos';
 import * as fs from 'fs';
 import * as path from 'path';
 const sharp = require('sharp');
@@ -69,17 +69,37 @@ export class UsersService {
 		}
 	}
 
-	async updateProfile(user_id: string, dto: UpdateProfileDto): Promise<UserResumeDto> {
-		if (dto.avatar) {
-			await this.uploadPhoto(user_id, dto.avatar);
+	async updatetwoFA(user_id: string, dto: UpdateTwoFADto): Promise<UserResumeDto> {
+
+		let where_filter = {
+			id: user_id,
 		}
+		
 		let data_filter: any = {
 			twoFA: dto.twoFA,
 		};
-		if (dto.nick_name) {
-			data_filter.avatar_name = dto.nick_name;
+
+		let user = await this.userRepository.updateUser(user_id, data_filter);
+
+		return new UserResumeDto(user);
+	}
+	
+	async updateProfile(user_id: string, dto: UpdateProfileDto): Promise<UserResumeDto> {
+		
+		console.log("dto.....: ... ", dto);
+		let user: User;
+
+		let where_filter = {
+			id: user_id,
 		}
-		let user: User = await this.userRepository.updateUser(user_id, data_filter);
+
+		let data_filter = {
+			avatar_name: dto.avatar_name,
+		} 	
+		user = await this.userRepository.updateUser(where_filter, data_filter);
+
+		let newDto = new UserResumeDto(user);
+		console.log("newDto: ", newDto); 
 		return new UserResumeDto(user);
 	}
 

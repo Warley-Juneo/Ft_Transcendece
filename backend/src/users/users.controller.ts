@@ -3,7 +3,7 @@ import { UsersService } from './users.service';
 import { User } from '@prisma/client';
 import { CreateUserDto } from './dtos/createUser.dto';
 import { UserResumeDto, UserProfileDto, UserLadderDto } from './dtos/output.dtos';
-import { AddFriendDto, ProfileDto, UpdateCoinsDto, UpdateProfileDto } from './dtos/input.dtos';
+import { AddFriendDto, ProfileDto, UpdateCoinsDto, UpdateProfileDto, UpdateTwoFADto } from './dtos/input.dtos';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { Response } from 'express';
 import { multerConfig } from './multer.config';
@@ -19,9 +19,14 @@ export class UsersController {
 
   @Post('updateProfile')
   async updateProfile(@Req() request, @Body() dto: UpdateProfileDto): Promise<UserResumeDto> {
-	return await this.service.updateProfile(request.user.sub, dto);
+    console.log("dto: ", dto);
+    return await this.service.updateProfile(request.user.sub, dto);
   }
 
+  @Post('update-twoFA')
+  async updateTwoFA(@Req() request, @Body() dto: UpdateTwoFADto) : Promise<UserResumeDto> {
+    return await this.service.updatetwoFA(request.user.sub, dto);
+  }
   @Post('updateCoins')
   async updateCoins(@Req() request, @Body() dto: UpdateCoinsDto): Promise<UserResumeDto> {
 	return await this.service.updateCoins(request.user.sub, dto);

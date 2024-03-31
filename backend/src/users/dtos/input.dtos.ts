@@ -5,15 +5,15 @@ export class AddFriendDto {
 	nick_name:	string;
 }
 
-export class UpdateProfileDto {
-	@IsString()
-	avatar:		string;
-
-	@IsString()
-	nick_name:	string;
+export class UpdateTwoFADto {
 
 	@IsNotEmpty()
 	twoFA:		boolean;
+}
+
+export class UpdateProfileDto {
+	@IsString()
+	avatar_name:	string;
 }
 
 export class UpdateCoinsDto {
