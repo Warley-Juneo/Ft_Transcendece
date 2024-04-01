@@ -6,6 +6,7 @@ import { ChangePasswordDto, CreateChatroomDto, CreateDirectChatroomDto, CreateDi
 import { ChatroomsDto, DirectChatRoomDto, OutputDirectMessageDto, OutputMessageDto, OutputValidateDto, UniqueChatroomDto } from './dto/output.dto';
 import * as bcrypt from 'bcrypt';
 import { map } from 'rxjs';
+import { itxClientDenyList } from '@prisma/client/runtime/library';
 
 @Injectable()
 export class ChatroomService {
@@ -122,12 +123,22 @@ export class ChatroomService {
 
 
 		let chat: UniqueChatroomDto = await this.findUniqueChatroom(dto.chat_name);
+		
+		chat.banned.forEach(async element => {
+			console.log("banned item: ", element);
+		});
+		
+		chat.kicked.forEach(async element => {
+			console.log("kiked item: ", element);
+		});
+		console.log("cheguei aqui");
 
 		if (chat.banned.find((item) => item.id == userId)) {
 			throw new UnauthorizedException("You were banned of this chat!!!")
 		}
 
 		if (chat.kicked.find((item) => item.userId.find((item) => item.id == userId))) {
+			console.log("eu fui kikado");
 			throw new UnauthorizedException("Você foi temporariamente kickado desse chat!!!")
 		}
 
@@ -393,9 +404,9 @@ export class ChatroomService {
 			}
 		}
 
-		if (!chat.members.find((item) => item.id == dto.other_id)) {
-			throw new UnauthorizedException("You can not kick a non member");
-		}
+		// if (!chat.members.find((item) => item.id == dto.other_id)) {
+		// 	throw new UnauthorizedException("You can not kick a non member");
+		// }
 
 		let kicked = await this.chatroomRepository.findKickedUserChatroom(dto);
 
@@ -436,11 +447,14 @@ export class ChatroomService {
 		await this.chatroomRepository.updateChatroom(other_where_filter, other_data_filter);
 
 		let response = await this.findUniqueChatroom(dto.chat_name);
+		console.log("usuario kikado: ", response);
 		response.password = '';
 		return response;
 	}
 
 	async muteMemberChatroom(userId: string, dto: WebsocketWithTimeDto): Promise<any> {
+		
+		console.log("\nMUTE USER....\n");
 		let chat = await this.findUniqueChatroom(dto.chat_name);
 
 		if (chat.owner_id == dto.other_id) {
@@ -456,9 +470,9 @@ export class ChatroomService {
 			}
 		}
 
-		if (!chat.members.find((item) => item.id == dto.other_id)) {
-			throw new UnauthorizedException("You can not mute a non member");
-		}
+		// if (!chat.members.find((item) => item.id == dto.other_id)) {
+		// 	throw new UnauthorizedException("You can not mute a non member");
+		// }
 
 		let mutted = await this.chatroomRepository.findMutedUserChatroom(dto.other_id, dto.chat_id);
 
@@ -484,7 +498,7 @@ export class ChatroomService {
 			mutted_time: time,
 		};
 
-		let kick_chat = await this.chatroomRepository.muteChatroom(data_filter);
+		let mute_chat = await this.chatroomRepository.muteChatroom(data_filter);
 
 		let response = await this.findUniqueChatroom(dto.chat_name);
 		response.password = '';
