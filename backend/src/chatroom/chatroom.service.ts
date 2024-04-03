@@ -63,7 +63,6 @@ export class ChatroomService {
 			if (dto.password == '') {
 				throw new BadRequestException('Invalid password');
 			}
-			console.log("dto: ", dto.password);
 			const saltOrRound = 8;
 			const hash = bcrypt.hashSync(dto.password, saltOrRound);
 			dto.password = hash;
@@ -124,14 +123,10 @@ export class ChatroomService {
 
 		let chat: UniqueChatroomDto = await this.findUniqueChatroom(dto.chat_name);
 		
-		chat.banned.forEach(async element => {
-			console.log("banned item: ", element);
-		});
-		
-		chat.kicked.forEach(async element => {
-			console.log("kiked item: ", element);
-		});
-		console.log("cheguei aqui");
+		let member = chat.members.find((item) => item.id == userId);
+		if (member == null) {
+			throw new UnauthorizedException("You are not member of this chat!!!")
+		}
 
 		if (chat.banned.find((item) => item.id == userId)) {
 			throw new UnauthorizedException("You were banned of this chat!!!")
@@ -360,6 +355,11 @@ export class ChatroomService {
 				throw new UnauthorizedException("You can not ban a adm from this group");
 			}
 		}
+		
+		if (!chat.members.find((item) => item.id == dto.other_id)) {
+			throw new UnauthorizedException("You can not ban a non member");
+		}
+		
 		let where_filter = {
 			name: chat.name,
 		};
@@ -404,9 +404,9 @@ export class ChatroomService {
 			}
 		}
 
-		// if (!chat.members.find((item) => item.id == dto.other_id)) {
-		// 	throw new UnauthorizedException("You can not kick a non member");
-		// }
+		if (!chat.members.find((item) => item.id == dto.other_id)) {
+			throw new UnauthorizedException("You can not kick a non member");
+		}
 
 		let kicked = await this.chatroomRepository.findKickedUserChatroom(dto);
 
@@ -470,9 +470,9 @@ export class ChatroomService {
 			}
 		}
 
-		// if (!chat.members.find((item) => item.id == dto.other_id)) {
-		// 	throw new UnauthorizedException("You can not mute a non member");
-		// }
+		if (!chat.members.find((item) => item.id == dto.other_id)) {
+			throw new UnauthorizedException("You can not mute a non member");
+		}
 
 		let mutted = await this.chatroomRepository.findMutedUserChatroom(dto.other_id, dto.chat_id);
 
