@@ -146,7 +146,7 @@ export class UsersRepository implements UsersRepositoryInterface {
       if (!friend) {
         return null;
       }
-      let status = await this.prisma.user.update({
+      let status1 = await this.prisma.user.update({
         where: {
           id: userId,
         },
@@ -158,6 +158,20 @@ export class UsersRepository implements UsersRepositoryInterface {
           }
         }
       });
+
+      let status2 = await this.prisma.user.update({
+        where: {
+          id: friend.id,
+        },
+        data: {
+          friends: {
+            connect: [
+              {id: userId}
+            ]
+          }
+        }
+      });
+
       let user = await this.findUserWithFriends(userId);
 
       return user.friends;
@@ -176,7 +190,7 @@ export class UsersRepository implements UsersRepositoryInterface {
         },
       });
 
-      let response = await this.prisma.user.update({
+      let response1 = await this.prisma.user.update({
         where: {
           id: userId,
         },
@@ -188,6 +202,20 @@ export class UsersRepository implements UsersRepositoryInterface {
           }
         }
       });
+
+      let response2 = await this.prisma.user.update({
+        where: {
+          id: friend.id,
+        },
+        data: {
+          friends: {
+            disconnect: [
+              {id: userId}
+            ]
+          }
+        }
+      });
+
       let user = await this.findUserWithFriends(userId);
 
       return user.friends;
