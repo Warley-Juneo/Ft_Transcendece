@@ -123,9 +123,11 @@ export class ChatroomService {
 
 		let chat: UniqueChatroomDto = await this.findUniqueChatroom(dto.chat_name);
 		
-		let member = chat.members.find((item) => item.id == userId);
-		if (member == null) {
-			throw new UnauthorizedException("You are not member of this chat!!!")
+		if (chat.type != "public") {
+			let member = chat.members.find((item) => item.id == userId);
+			if (member == null) {
+				throw new UnauthorizedException("You are not member of this chat!!!")
+			}
 		}
 
 		if (chat.banned.find((item) => item.id == userId)) {
@@ -454,7 +456,6 @@ export class ChatroomService {
 
 	async muteMemberChatroom(userId: string, dto: WebsocketWithTimeDto): Promise<any> {
 		
-		console.log("\nMUTE USER....\n");
 		let chat = await this.findUniqueChatroom(dto.chat_name);
 
 		if (chat.owner_id == dto.other_id) {
