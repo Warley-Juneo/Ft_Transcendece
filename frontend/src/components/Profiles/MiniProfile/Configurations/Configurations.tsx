@@ -51,8 +51,7 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 	}, []);
 
 	function sendInfosUserBack(nickname: string) {
-		
-		console.log("nickname: ",nickname);
+
 		axios.post(`${process.env.REACT_APP_HOST_URL}/users/updateProfile`, {avatar_name: nickname}, {
 			headers: {
 				Authorization: Cookies.get('jwtToken'),

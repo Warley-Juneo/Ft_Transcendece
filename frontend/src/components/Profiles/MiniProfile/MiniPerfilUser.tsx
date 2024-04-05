@@ -31,7 +31,7 @@ export default function MiniPerfilUser(props: propsMiniProfile) {
 				<img className="rounded-circle h-100 w-100 me-3" src={userData.avatar} alt='foto' />
 				<Status
 					is_active={true}
-					name={userData.nickname}
+					name={userData.avatar_name}
 					my_id={userData.id}
 					admin={[]}
 					mute={[]}

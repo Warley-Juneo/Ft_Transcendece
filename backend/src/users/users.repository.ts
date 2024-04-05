@@ -70,6 +70,7 @@ export class UsersRepository implements UsersRepositoryInterface {
         nickname: true,
         is_active: true,
 		match_status: true,
+		avatar_name: true,
       },
     });
     return response;
@@ -129,6 +130,7 @@ export class UsersRepository implements UsersRepositoryInterface {
         avatar: true,
         nickname: true,
         is_active: true,
+		avatar_name: true,
       }
     });
     return response;
@@ -232,6 +234,7 @@ export class UsersRepository implements UsersRepositoryInterface {
         avatar: true,
         nickname: true,
         points: true,
+		avatar_name: true,
         _count: {
           select: {
             match_as_player_1: true,

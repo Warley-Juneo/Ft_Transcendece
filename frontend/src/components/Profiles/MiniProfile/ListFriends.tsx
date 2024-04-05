@@ -9,6 +9,7 @@ export type Players = {
 	avatar: string,
 	id: string,
 	nickname: string,
+	avatar_name: string,
 	is_active: boolean,
 	match_status: string
 }
@@ -72,6 +73,7 @@ export default function ListFriends(props: PropsListFriends) {
 			{
 				props.players.map((play: Players) => {
 					if (play.id === userData.id) return null
+					console.log(play)
 					return (
 						<div className='d-flex hover' key={play.id}>
 							<img
@@ -83,7 +85,7 @@ export default function ListFriends(props: PropsListFriends) {
 							<div className='d-flex w-100' onClick={() => handleOpenChatPrivate(play.nickname, play.avatar)}>
 								<Status
 									is_active={play.is_active}
-									name={play.nickname}
+									name={play.avatar_name}
 									my_id={userData.id}
 									mute={props.mute ? props.mute : []}
 									admin={props.admin ? props.admin : []}

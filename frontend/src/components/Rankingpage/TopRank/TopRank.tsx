@@ -8,12 +8,14 @@ export type typeRaking = {
 	id: string
 	avatar: string
 	nickname: string
-	points: number,
-	draws: number,
-	ladder: number,
-	loses: number,
-	matches: number,
-	wins: number,
+	avatar_name: string
+
+	points: number
+	draws: number
+	ladder: number
+	loses: number
+	matches: number
+	wins: number
 }
 
 export default function TopRank() {
@@ -52,7 +54,7 @@ export default function TopRank() {
 								<p>{index + 1}</p>
 							</div>
 							<div className="col-10 h-100 p-1">
-								<AvatarAndUser avatarUrl={`data:image/jpeg;base64, ${user.avatar}`} nickname={user.nickname} />
+								<AvatarAndUser avatarUrl={`data:image/jpeg;base64, ${user.avatar}`} nickname={user.avatar_name} />
 							</div>
 						</div>
 					</div>
