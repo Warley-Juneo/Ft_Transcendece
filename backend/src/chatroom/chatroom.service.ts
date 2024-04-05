@@ -123,22 +123,14 @@ export class ChatroomService {
 
 		let chat: UniqueChatroomDto = await this.findUniqueChatroom(dto.chat_name);
 		
-		if (chat.type != "public") {
-			let member = chat.members.find((item) => item.id == userId);
-			if (member == null) {
-				throw new UnauthorizedException("You are not member of this chat!!!")
-			}
-		}
 
 		if (chat.banned.find((item) => item.id == userId)) {
 			throw new UnauthorizedException("You were banned of this chat!!!")
 		}
 
 		if (chat.kicked.find((item) => item.userId.find((item) => item.id == userId))) {
-			console.log("eu fui kikado");
 			throw new UnauthorizedException("Você foi temporariamente kickado desse chat!!!")
 		}
-
 
 		if (chat.type == "protected") {
 			if (!await bcrypt.compare(dto.password, chat.password)) {
@@ -150,6 +142,19 @@ export class ChatroomService {
 				throw new UnauthorizedException("You are not a member of this group")
 			}
 		}
+
+		let where_filter2 = {
+			name: chat.name,
+		};
+		let data_filter2 = {
+			members: {
+				connect: {
+					id: userId,
+				},
+			},
+		};
+		await this.chatroomRepository.updateChatroom(where_filter2, data_filter2);
+
 		return chat;
 	}
 
@@ -358,9 +363,9 @@ export class ChatroomService {
 			}
 		}
 		
-		if (!chat.members.find((item) => item.id == dto.other_id)) {
-			throw new UnauthorizedException("You can not ban a non member");
-		}
+		// if (!chat.members.find((item) => item.id == dto.other_id)) {
+		// 	throw new UnauthorizedException("You can not ban a non member");
+		// }
 		
 		let where_filter = {
 			name: chat.name,
@@ -406,11 +411,11 @@ export class ChatroomService {
 			}
 		}
 
-		if (!chat.members.find((item) => item.id == dto.other_id)) {
-			throw new UnauthorizedException("You can not kick a non member");
-		}
+		// if (!chat.members.find((item) => item.id == dto.other_id)) {
+		// 	throw new UnauthorizedException("You can not kick a non member");
+		// }
 
-		let kicked = await this.chatroomRepository.findKickedUserChatroom(dto);
+		let kicked = await this.chatroomRepository.findKickedUserChatroom(dto.other_id, dto.chat_id);
 
 		if (kicked.find((item) => item)) {
 			throw new UnauthorizedException("User already kicked");
@@ -436,20 +441,7 @@ export class ChatroomService {
 
 		let kick_chat = await this.chatroomRepository.kickChatroom(data_filter);
 
-		let other_where_filter = {
-			name: chat.name,
-		};
-		let other_data_filter = {
-			members: {
-				disconnect: {
-					id: dto.other_id,
-				},
-			},
-		};
-		await this.chatroomRepository.updateChatroom(other_where_filter, other_data_filter);
-
 		let response = await this.findUniqueChatroom(dto.chat_name);
-		console.log("usuario kikado: ", response);
 		response.password = '';
 		return response;
 	}
@@ -471,9 +463,9 @@ export class ChatroomService {
 			}
 		}
 
-		if (!chat.members.find((item) => item.id == dto.other_id)) {
-			throw new UnauthorizedException("You can not mute a non member");
-		}
+		// if (!chat.members.find((item) => item.id == dto.other_id)) {
+		// 	throw new UnauthorizedException("You can not mute a non member");
+		// }
 
 		let mutted = await this.chatroomRepository.findMutedUserChatroom(dto.other_id, dto.chat_id);
 
