@@ -71,30 +71,30 @@ export default function ConfigurationGame(props: propsConfigurationGame): JSX.El
 		// const avatarFile = form.get('avatar') as File;
 
 		// Tente enviar FormData diretamente
-		if (form.get('avatar')) {
-
+		let name = (form.get('avatar') as File).name;
+		if (form.get('avatar') && name !== '') {
 			axios.post(`${process.env.REACT_APP_HOST_URL}/users/upload-avatar`, form, {
 				headers: {
 					Authorization: Cookies.get('jwtToken'),
 					"ngrok-skip-browser-warning": "69420",
-					'Content-Type': 'multipart/form-data' // Defina o tipo de conteúdo como multipart/form-data
+					'Content-Type': 'multipart/form-data'
 				}
 			}).then(() => {
 				userData.updateDataUser();
-			}).catch(() => {});
+			}).catch((error) => {
+			});
 		}
 		if (form.get('nickname')) {
 			sendInfosUserBack(form.get('nickname') as string);
 		}
 	};
 
-
 	const getCorrectDiv = (isEditing: boolean) => {
 		if (isEditing) return <InputEditName />
 		return (
 			<IdentifyInputName
 				_avatar={userData.user.avatar}
-				_nickname={userData.user.nickname}
+				_nickname={userData.user.avatar_name}
 			/>
 		)
 	}

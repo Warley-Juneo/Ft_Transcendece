@@ -74,15 +74,20 @@ export class UsersController {
   @Post('upload-avatar')
   @UseInterceptors(FileInterceptor('avatar', multerConfig))
   async uploadAvatar(@UploadedFile(
-    new ParseFilePipe({
-      validators: [
-        new MaxFileSizeValidator({ maxSize: 35 * 1024 }),
-        new FileTypeValidator({ fileType: 'image/' }),
-        // new AvatarSizeValidationPipe(),
-      ]
-    })
+    // new ParseFilePipe({
+    //   validators: [
+    //     new MaxFileSizeValidator({ maxSize: 35 * 1024 }),
+    //     new FileTypeValidator({ fileType: 'image/' }),
+    //     new AvatarSizeValidationPipe(),
+    //   ]
+    // })
   ) file: Express.Multer.File, @Req() request, @Res() res: Response) {
 
+    // if file diferente de img retorna erro
+    if (file.mimetype != 'image/png' && file.mimetype != 'image/jpeg') {
+      return;
+    } 
+    
     let buffer = await this.service.uploadAvatar(file.originalname, request.user.sub);
 
     // Set appropriate response headers

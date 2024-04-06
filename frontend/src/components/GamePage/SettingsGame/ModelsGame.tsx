@@ -2,6 +2,8 @@ import ButtonModelsGame from "./ButtonModelsGame";
 import playPong from '../../../assets/settingsGame/playPong.jpg'
 import playSpecialPong from '../../../assets/settingsGame/playSpecialPong.jpg'
 import bgFire from "../../../assets/game/planets/backgrounds/bgFire.jpg";
+import React, { useState } from "react";
+import { Modal } from "react-bootstrap";
 
 export default function ModelsGame(): JSX.Element {
 
@@ -17,8 +19,40 @@ export default function ModelsGame(): JSX.Element {
 		backgroundSize: 'cover',
 	}
 
+	const [isOpen, setIsOpen] = useState(false);
+
+	const openModal = () => {
+		setIsOpen(true);
+	};
+
+	const closeModal = () => {
+		setIsOpen(false);
+	};
+
 	return (
 		<div style={cssDivFilhoSelectGame}>
+			<button onClick={openModal}>Regras do Jogo!</button>
+
+			<Modal show={isOpen} onHide={closeModal}>
+				<Modal.Header closeButton>
+					<Modal.Title>Regras Gerais: </Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<p>O jogador que fizer 10 pontos primeiro ganha.</p>
+					<p>Em caso de desconexão você perde automaticamente.</p>
+					<p>O modo normal game possui pooderes</p>
+					<p>O modo ranqueado é o padrão pong 1972</p>
+					<br></br>
+
+					<h6>Teclas:</h6>
+					<p><u>W</u>  subir raquete</p>
+					<p><u>S</u>  descer raquete </p>
+				</Modal.Body>
+				<Modal.Footer>
+					<button onClick={closeModal}>Close</button>
+				</Modal.Footer>
+			</Modal>
+
 			<div className="d-flex p-3" id='divOptionsStartGame'>
 				<ButtonModelsGame
 					photo={playPong}
@@ -35,6 +69,7 @@ export default function ModelsGame(): JSX.Element {
 					model="VS COOP"
 				/>
 			</div>
+
 			<div className="d-flex p-3">
 				<ButtonModelsGame
 					photo={playSpecialPong}
