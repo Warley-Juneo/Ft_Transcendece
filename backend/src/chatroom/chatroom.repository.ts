@@ -275,6 +275,7 @@ export class ChatroomRepository {
 						user: {
 							select: {
 								nickname: true,
+								avatar_name: true,
 								avatar: true,
 								id: true,
 							},

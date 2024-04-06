@@ -41,6 +41,7 @@ export class ChatroomsDto {
 export class UniqueUserChatrommDto {
 	id: string;
 	nickname: string;
+	avatar_name: string;
 	avatar: string;
 	is_active: boolean;
 }

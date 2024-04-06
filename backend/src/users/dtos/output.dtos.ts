@@ -6,7 +6,8 @@ export class UserProfileDto {
 	first_name: string;
 	last_name: string;
 	nickname: string;
-	avatar: string; //trocar aqui para o tipo File
+	avatar_name: string;
+	avatar: string;
 
 	wins: number;
 	loses: number;
@@ -19,6 +20,7 @@ export class UserProfileDto {
 		this.first_name = obj.first_name;
 		this.last_name = obj.last_name;
 		this.nickname = obj.nickname;
+		this.avatar_name = obj.avatar_name;
 		this.wins = obj.wins;
 		this.loses = obj.loses;
 		this.draws = obj.draws;

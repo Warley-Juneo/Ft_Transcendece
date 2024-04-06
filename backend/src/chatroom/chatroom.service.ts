@@ -83,7 +83,7 @@ export class ChatroomService {
 			photo: photo,
 		};
 		await this.chatroomRepository.updateChatroom(where_filter, data_filter);
-		
+
 	}
 
 	async deleteChatroom(userId: string, dto: DeleteChatroomDto): Promise<any> {
@@ -122,7 +122,7 @@ export class ChatroomService {
 
 
 		let chat: UniqueChatroomDto = await this.findUniqueChatroom(dto.chat_name);
-		
+
 		if (chat.type != "public") {
 			let member = chat.members.find((item) => item.id == userId);
 			if (member == null) {
@@ -135,7 +135,6 @@ export class ChatroomService {
 		}
 
 		if (chat.kicked.find((item) => item.userId.find((item) => item.id == userId))) {
-			console.log("eu fui kikado");
 			throw new UnauthorizedException("Você foi temporariamente kickado desse chat!!!")
 		}
 
@@ -200,7 +199,7 @@ export class ChatroomService {
 		let where_filter = {
 			name: chat.name,
 		};
-		
+
 		let data_filter
 		if (chat.type == "private") {
 			data_filter = {
@@ -357,11 +356,11 @@ export class ChatroomService {
 				throw new UnauthorizedException("You can not ban a adm from this group");
 			}
 		}
-		
+
 		if (!chat.members.find((item) => item.id == dto.other_id)) {
 			throw new UnauthorizedException("You can not ban a non member");
 		}
-		
+
 		let where_filter = {
 			name: chat.name,
 		};
@@ -449,13 +448,12 @@ export class ChatroomService {
 		await this.chatroomRepository.updateChatroom(other_where_filter, other_data_filter);
 
 		let response = await this.findUniqueChatroom(dto.chat_name);
-		console.log("usuario kikado: ", response);
 		response.password = '';
 		return response;
 	}
 
 	async muteMemberChatroom(userId: string, dto: WebsocketWithTimeDto): Promise<any> {
-		
+
 		let chat = await this.findUniqueChatroom(dto.chat_name);
 
 		if (chat.owner_id == dto.other_id) {
@@ -509,7 +507,7 @@ export class ChatroomService {
 	async findUniqueChatroom(chat_name: string): Promise<UniqueChatroomDto> {
 
 		let chat = await this.chatroomRepository.findUniqueChatroom(chat_name);
-
+		console.log("\n\n\nchat", chat.message)
 		if (!chat) {
 			throw new BadRequestException('Chatroom do not exist');
 		}

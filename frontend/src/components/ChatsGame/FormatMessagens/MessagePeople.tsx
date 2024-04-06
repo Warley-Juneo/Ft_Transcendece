@@ -19,6 +19,7 @@ type propsMessagePeople = {
 	avatarUrl: string,
 	dataFormating: string,
 	nickname: string,
+	avatar_name: string,
 	id: string,
 	showDinamicProfile: (nickname: string, id: string) => void,
 }
@@ -33,7 +34,7 @@ export default function MessagePeople(props: propsMessagePeople): JSX.Element {
 					onClick={() => props.showDinamicProfile(props.nickname, props.id)}
 			/>
 			<div className='bg-light rounded ms-2 p-2' style={{ whiteSpace: 'pre-line' }}>
-				<p>{props.nickname}</p>
+				<p>{props.avatar_name}</p>
 				<div className="d-flex">
 					<p>{props.content}</p>
 					<p className="ms-2" style={cssDetailsHidden}>{props.dataFormating}</p>

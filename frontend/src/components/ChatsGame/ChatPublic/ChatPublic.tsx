@@ -14,7 +14,9 @@ type User = {
 	nickname: string,
 	avatar: string,
 	id: string,
+	avatar_name: string,
 }
+
 export type Messages = {
 	id: string,
 	content: string,

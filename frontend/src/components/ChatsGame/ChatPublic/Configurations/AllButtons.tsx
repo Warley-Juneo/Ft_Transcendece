@@ -8,7 +8,6 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { ChatContext } from "../ChatPublic";
 import AlterPassword from "./AlterPassword";
-import GetUsersGame from "./GetUsersGame";
 import { UserData } from "../../../InitialPage/Contexts/Contexts";
 import ButtonTime from "./KickMember";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
@@ -24,24 +23,21 @@ type UsersGame = {
 export default function AllButtons(): JSX.Element {
 	const { chatData: { name, id } } = useContext(ChatContext);
 	const dataUser = useContext(UserData).user;
-	const [playersGame, setPlayersGame] = useState<UsersGame[]>([]);
 	const userData = useContext(UserData).user;
 
-	useEffect(() => {
-		GetUsersGame().then((res) => {
-			setPlayersGame(res);
+	async function getUserId(avatar_name: string): Promise<string> {
+		const users = await axios.get(`${process.env.REACT_APP_HOST_URL}/users/find-all`, {
+			headers: {
+				Authorization: Cookies.get("jwtToken"),
+				"ngrok-skip-browser-warning": "69420"
+			},
 		})
-	}, [])
-
-	const getUserId = (nickname: string): string => {
-		if (!playersGame) return ''
-		const getDataNickname = playersGame.find((user) => user.nickname === nickname) || '';
-		return getDataNickname ? getDataNickname.id : ''
+		return users.data.find((user: any) => user.avatar_name === avatar_name).id
 	}
 
-	const addedNewMember = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+	const addedNewMember = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key !== 'Enter') return;
-		const userId = getUserId(event.currentTarget.value);
+		const userId = await getUserId(event.currentTarget.value);
 		if (userId) {
 			let obj = {
 				my_id: dataUser.id,
@@ -53,9 +49,9 @@ export default function AllButtons(): JSX.Element {
 		}
 	}
 
-	const addAdm = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+	const addAdm = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key !== 'Enter') return;
-		const userId = getUserId(event.currentTarget.value);
+		const userId = await getUserId(event.currentTarget.value);
 		if (userId) {
 			if (userId) {
 				let obj = {
@@ -69,9 +65,9 @@ export default function AllButtons(): JSX.Element {
 		}
 	}
 
-	const removedAdm = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+	const removedAdm = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key !== 'Enter') return;
-		const userId = getUserId(event.currentTarget.value);
+		const userId = await getUserId(event.currentTarget.value);
 		if (userId) {
 			let obj = {
 				my_id: dataUser.id,
@@ -83,9 +79,9 @@ export default function AllButtons(): JSX.Element {
 		}
 	}
 
-	const banMember = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+	const banMember = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key !== 'Enter') return;
-		const userId = getUserId(event.currentTarget.value);
+		const userId = await getUserId(event.currentTarget.value);
 
 		if (userId) {
 			let obj = {
@@ -98,7 +94,7 @@ export default function AllButtons(): JSX.Element {
 		}
 	}
 
-	const deleteChat = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+	const deleteChat = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key !== 'Enter') return;
 		if (event.currentTarget.value !== name) return;
 		let obj = {
@@ -110,7 +106,7 @@ export default function AllButtons(): JSX.Element {
 		userData.socket?.emit('delete-group', obj);
 	}
 
-	const removePassword = (event: React.KeyboardEvent<HTMLInputElement>) => {
+	const removePassword = async (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key !== "Enter") return;
 		axios.post(`${process.env.REACT_APP_HOST_URL}/chatroom/remove-password-group`, {
 			chat_name: name,
@@ -124,7 +120,7 @@ export default function AllButtons(): JSX.Element {
 			.then(() => { })
 			.catch(() => { })
 	}
-	const changePassword = (event: FormEvent<HTMLFormElement>): void => {
+	const changePassword = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const form = new FormData(event.currentTarget);
 		axios.post(`${process.env.REACT_APP_HOST_URL}/chatroom/change-password-group`, {

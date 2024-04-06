@@ -41,6 +41,7 @@ export default function FormatMessages(props: propsFormatMessages): JSX.Element 
 								avatarUrl={message.user.avatar}
 								dataFormating={dataFormating}
 								nickname={message.user.nickname}
+								avatar_name={message.user.avatar_name}
 								showDinamicProfile={showDinamicProfile}
 								id={message.user.id}
 								key={message.id}

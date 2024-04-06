@@ -5,7 +5,7 @@ import InputButton from "./InputButton";
 type buttonConfigurationProps = {
 	Icon: IconType;
 	content: string;
-	function: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+	function: (event: React.KeyboardEvent<HTMLInputElement>) => Promise<void>;
 }
 
 export default function Buttons(props: buttonConfigurationProps) : JSX.Element {

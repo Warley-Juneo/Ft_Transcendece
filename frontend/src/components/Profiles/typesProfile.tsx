@@ -1,5 +1,6 @@
 export type InfosUserPerfil = {
 	nickname: string;
+	avatar_name: string;
 	wins: number;
 	draws: number;
 	loses: number;

@@ -6,7 +6,7 @@ import { UserData } from "../../../InitialPage/Contexts/Contexts";
 type KickMemberProps = {
 	Icon: IconType;
 	content: string;
-	getUserId: (nickname: string) => string;
+	getUserId:  (nickname: string) => Promise<string>;
 	my_id: string;
 	chat_name: string;
 	chat_id: string;

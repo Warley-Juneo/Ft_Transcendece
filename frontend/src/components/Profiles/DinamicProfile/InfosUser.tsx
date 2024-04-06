@@ -38,7 +38,7 @@ export default function InfosUser({ nickName }: { nickName: string }): JSX.Eleme
 				<ProfilePhoto
 					borderImg={borderImg}
 					avatar={infosUser.avatar}
-					nickname={infosUser.nickname}
+					nickname={infosUser.avatar_name}
 				/>
 			</div>
 			<div className="col-4 h-100">

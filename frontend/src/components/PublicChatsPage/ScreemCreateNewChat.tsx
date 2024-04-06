@@ -61,7 +61,7 @@ export default function CreateNewChat(props: functionsChats) {
 							type="checkbox"
 							ref={checkboxPrivate}
 							className="form-check-input shadow-grounps"
-							onClick={() => { checkboxProtect.current!.checked = false; handleShowInputPassword() }}>
+						>
 						</input>
 						<label className="form-check-label" htmlFor="checkboxPrivate">Privado </label>
 					</div>
