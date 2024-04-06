@@ -507,7 +507,6 @@ export class ChatroomService {
 	async findUniqueChatroom(chat_name: string): Promise<UniqueChatroomDto> {
 
 		let chat = await this.chatroomRepository.findUniqueChatroom(chat_name);
-		console.log("\n\n\nchat", chat.message)
 		if (!chat) {
 			throw new BadRequestException('Chatroom do not exist');
 		}

@@ -225,6 +225,7 @@ export class ChatroomRepository {
 					select: {
 						id: true,
 						nickname: true,
+						avatar_name: true,
 						avatar: true,
 						is_active: true,
 					},
@@ -233,6 +234,7 @@ export class ChatroomRepository {
 					select: {
 						id: true,
 						nickname: true,
+						avatar_name: true,
 						avatar: true,
 						is_active: true,
 					},
@@ -240,6 +242,7 @@ export class ChatroomRepository {
 				members: {
 					select: {
 						id: true,
+						avatar_name: true,
 						nickname: true,
 						avatar: true,
 						is_active: true,
@@ -248,6 +251,7 @@ export class ChatroomRepository {
 				banned_member: {
 					select: {
 						id: true,
+						avatar_name: true,
 						nickname: true,
 						avatar: true,
 						is_active: true,
