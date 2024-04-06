@@ -144,17 +144,17 @@ export class ChatroomRepository {
 		return chat;
 	}
 
-	async findKickedUserChatroom(dto: WebsocketWithTimeDto): Promise<any[]> {
+	async findKickedUserChatroom(userId: string, chatroomId: string): Promise<any[]> {
 		let chat = await this.prisma.kickedChatroom.findMany({
 			where: {
 				userId: {
 					some: {
-						id: dto.other_id,
+						id: userId,
 					},
 				},
 				chatroom: {
 					some: {
-						id: dto.chat_id,
+						id: chatroomId,
 					},
 				},
 			},

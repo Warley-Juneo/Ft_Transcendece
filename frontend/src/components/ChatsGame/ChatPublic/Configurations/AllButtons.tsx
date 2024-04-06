@@ -177,8 +177,8 @@ export default function AllButtons(): JSX.Element {
 				my_id={dataUser.id}
 				chat_name={name}
 				chat_id={id}
-				id={"kick"}
-				route="kick-member-group"
+				id={"mute"}
+				route="mute-member-group"
 			/>
 
 			<AlterPassword funcChange={changePassword} />
