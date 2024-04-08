@@ -14,25 +14,25 @@ services:
     volumes:
       - pg_data:/var/lib/postgresql/data
 
-  # backend:
-  #   build: ./backend
-  #   container_name: backend_ct
-  #   ports:
-  #     - '3000:3000'
-  #   networks:
-  #     - 'ft_transcendence'
-  #   depends_on:
-  #     - postgres
+  backend:
+    build: ./backend
+    container_name: backend_ct
+    ports:
+      - '3000:3000'
+    networks:
+      - 'ft_transcendence'
+    depends_on:
+      - postgres
 
-  # frontend:
-  #   build: ./frontend
-  #   container_name: frontend_ct
-  #   ports:
-  #     - '3001:3001'
-  #   networks:
-  #     - 'ft_transcendence'
-  #   depends_on:
-  #     - backend
+  frontend:
+    build: ./frontend
+    container_name: frontend_ct
+    ports:
+      - '3001:3001'
+    networks:
+      - 'ft_transcendence'
+    depends_on:
+      - backend
 
 volumes:
   pg_data:
