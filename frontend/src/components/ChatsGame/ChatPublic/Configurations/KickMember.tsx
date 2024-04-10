@@ -20,9 +20,9 @@ export default function ButtonTime(props: KickMemberProps): JSX.Element {
 	const kickDay = useRef<HTMLInputElement>(null);
 	const userData = useContext(UserData).user;
 
-	const kickedMember = (event: React.KeyboardEvent<HTMLInputElement>): void => {
+	const kickedMember = async (event: React.KeyboardEvent<HTMLInputElement>): Promise<void> => {
 		if (event.key !== 'Enter') return;
-		const userId = props.getUserId(event.currentTarget.value);
+		const userId = await props.getUserId(event.currentTarget.value);
 
 		let obj = {
 			my_id: props.my_id,

@@ -32,7 +32,7 @@ export default function AllButtons(): JSX.Element {
 				"ngrok-skip-browser-warning": "69420"
 			},
 		})
-		return users.data.find((user: any) => user.avatar_name === avatar_name).id
+		return users.data.find((user: any) => user.avatar_name === avatar_name)?.id
 	}
 
 	const addedNewMember = async (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -120,6 +120,7 @@ export default function AllButtons(): JSX.Element {
 			.then(() => { })
 			.catch(() => { })
 	}
+
 	const changePassword = async (event: FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
 		const form = new FormData(event.currentTarget);
@@ -137,6 +138,7 @@ export default function AllButtons(): JSX.Element {
 			.then(() => { })
 			.catch(() => { })
 	}
+
 	return (
 		<div className="p-3 text-start position-relative">
 			<Button
